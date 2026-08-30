@@ -1,0 +1,104 @@
+.main-menu.fixed-header {
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 999;
+  background: $white;
+  animation: sticky 1s;
+  box-shadow: 0px 0px 30px 0px rgba(87, 95, 245, 0.1);
+  width: 100%;
+}
+@keyframes sticky {
+  0% {
+    top: -100px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.header-1 {
+  padding: 30px 120px;
+  @include breakpoint(max-xl) {
+    padding: 30px 60px;
+  }
+  @include breakpoint(max-lg) {
+    padding: 30px 10px;
+  }
+}
+
+.header-2 {
+  position: absolute;
+  width: 100%;
+  top: 30px;
+  .header-2-content {
+    background-color: $white;
+    border-radius: 999px;
+    padding: 17px 30px;
+  }
+  .toggle-sidebar {
+    background-color: $secondary;
+  }
+  .theme-btn-2 {
+    border: 1px solid $primary;
+    &:hover {
+      border: 1px solid $primary;
+      background-color: transparent;
+      color: $primary;
+    }
+  }
+}
+
+.header-social {
+  ul {
+    @include flexbox(row, flex-end, center);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    li {
+      a {
+        border: 1px solid rgbaGenerate($gray300, 20%);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        @include flexbox(row, center, center);
+        @include transition;
+        &:hover {
+          background-color: $secondary;
+          border-color: $secondary;
+        }
+      }
+    }
+  }
+}
+
+.toggle-sidebar {
+  display: none;
+  @include breakpoint(max-xl) {
+    @include flexbox(row, center, center);
+  }
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  @include transition;
+  background-color: $white;
+  margin-left: 17px;
+  .toggle {
+    @include flexbox(row, flex-end, flex-end);
+    flex-direction: column;
+    gap: 5px;
+  }
+  span {
+    height: 3px;
+    width: 15px;
+    background-color: $gray500;
+    &:nth-child(2) {
+      width: 22px;
+    }
+    &:last-child {
+      width: 15px;
+    }
+  }
+}

@@ -1,0 +1,336 @@
+.blog-page {
+  h2 {
+    font-size: 45px;
+    @include breakpoint(max-xl) {
+      font-size: 35px;
+    }
+    @include breakpoint(max-sm) {
+      font-size: 25px;
+    }
+  }
+  p {
+    margin-top: 20px;
+  }
+  .blog-2-info {
+    p {
+      margin-top: 0;
+    }
+  }
+  .read-more {
+    margin-top: 40px;
+  }
+  .blog-item .blog-content {
+    padding: 30px 40px 35px;
+  }
+}
+
+.pagination-container {
+  .pagination {
+    @include flexbox(row, center, center);
+    gap: 20px;
+    .page-numbers {
+      font-size: 22px;
+      @include flexbox(row, center, center);
+      border: 1px solid $gray200;
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      @include transition;
+      &:hover,
+      &.current {
+        border: 1px solid $primary;
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+}
+
+%sidebar-card {
+  padding: 17px 30px;
+  background-color: $white;
+  border-radius: 999px;
+}
+
+.sidebar-widget {
+  border-radius: 20px;
+  background-color: $gray100;
+  padding: 40px;
+  .search-form {
+    .input-group {
+      @extend %sidebar-card;
+      @include flexbox(row, space-between, center);
+      input {
+        border: 0;
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+  .widget-title {
+    font-size: 30px;
+    color: $gray500;
+    margin-bottom: 30px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include flexbox(column, start, start);
+    gap: 20px;
+    li {
+      width: 100%;
+      @extend %sidebar-card;
+      @include flexbox(row, space-between, center);
+    }
+  }
+  .recent-posts {
+    @include flexbox(column, start, start);
+    gap: 30px;
+    .recent-post {
+      @extend %sidebar-card;
+      border-radius: 20px;
+      padding: 20px 30px;
+      .recent-post-cat {
+        @include flexbox(row, start, center);
+        gap: 5px;
+        margin-bottom: 10px;
+        p {
+          font-size: 14px;
+          letter-spacing: 0.1px;
+        }
+      }
+    }
+  }
+}
+
+.tagcloud {
+  @include flexbox(row, start, center);
+  gap: 15px;
+  flex-wrap: wrap;
+  a {
+    background-color: $white;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    border-radius: 999px;
+    padding: 5px 9.5px;
+    display: inline-block;
+    @include transition;
+    &:hover {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+}
+
+.blog-details {
+  .blog-2-info {
+    i {
+      color: $primary;
+    }
+  }
+}
+
+.blog-details-title {
+  font-size: 45px;
+  color: $gray500;
+  line-height: 60.8px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.blog-details-img {
+  max-height: 500px;
+}
+
+.blog-details-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @include flexbox(column, start, start);
+  gap: 20px;
+  li {
+    &::before {
+      content: "\f101";
+      font-family: "Font Awesome 5 Pro";
+      margin-right: 15px;
+      color: $primary;
+    }
+  }
+}
+
+.blog-details-content {
+  @include flexbox(column, start, start);
+  gap: 30px;
+}
+
+blockquote {
+  background-color: $gray100;
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  cite {
+    font-size: 22px;
+    font-weight: 500;
+    color: $gray500;
+  }
+  &::before {
+    content: "\e907";
+    font-family: "wv-icon" !important;
+    font-size: 40px;
+    color: $primary;
+    transform: rotate(180deg) !important;
+    display: inline-block;
+  }
+}
+
+.blockquote {
+  @include flexbox(row, start, start);
+  gap: 20px;
+  &::before {
+    content: "\e907";
+    font-family: "wv-icon" !important;
+    margin-top: -10px;
+  }
+}
+
+.tags-container {
+  @include flexbox(row, start, center);
+  gap: 20px;
+  a {
+    background-color: $gray100;
+  }
+}
+.blog-details-footer {
+  @include flexbox(row, space-between, start);
+}
+.share-container {
+  @extend .header-social;
+  ul {
+    li {
+      a {
+        background-color: $gray100;
+        border: 0;
+        &:hover {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.next-prev {
+  @include flexbox(row, space-between, center);
+  gap: 20px;
+  border-radius: 20px;
+  padding: 20px 30px;
+  border: 1px solid $gray200;
+  margin-top: 35px;
+
+  a {
+    @include flexbox(row, center, center);
+    gap: 20px;
+    &:hover {
+      i {
+        background-color: $primary;
+        border: 1px solid $primary;
+        color: $white;
+      }
+    }
+    i {
+      font-size: 20px;
+      color: $gray500;
+      @include transition;
+      height: 50px;
+      width: 50px;
+      @include flexbox(row, center, center);
+      border-radius: 50%;
+      border: 1px solid $gray200;
+    }
+  }
+}
+
+.comments-container {
+  margin-top: 80px;
+}
+.comment-box {
+  padding: 30px;
+  border-radius: 20px;
+  background-color: $gray100;
+  margin-top: 30px;
+  .commnet-author-info {
+    @include flexbox(row, space-between, center);
+    gap: 20px;
+    margin-bottom: 20px;
+    a {
+      padding: 10px 20px;
+      background-color: $white;
+      border-radius: 999px;
+      @extend %btn-style;
+      color: $gray500;
+      @include transition;
+      &:hover {
+        background-color: $primary;
+        color: $white;
+      }
+    }
+    p {
+      font-size: 14px;
+      letter-spacing: 0.1px;
+      margin-block-start: 5px;
+    }
+  }
+}
+
+.comment-form {
+  margin-top: 60px;
+  .comment-reply-title {
+    color: $gray500;
+    text-transform: capitalize;
+    font-size: 45px;
+  }
+  .theme-btn-2 {
+    padding: 22px 50px;
+  }
+  input,
+  textarea,
+  .nice-select {
+    margin-top: 30px;
+  }
+  .theme-btn-2 {
+    margin-top: 40px;
+  }
+  input,
+  textarea,
+  .nice-select {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid $gray200;
+    border-radius: 0;
+    padding-bottom: 15px;
+    padding-left: 0;
+    resize: none;
+    &:focus {
+      outline: 0;
+    }
+  }
+  .nice-select {
+    ul {
+      width: 100%;
+    }
+    li {
+      width: 100%;
+    }
+  }
+  textarea {
+    height: 113px;
+  }
+}
+
+.divider {
+  height: 40px;
+  width: 1px;
+  background-color: $primary;
+}

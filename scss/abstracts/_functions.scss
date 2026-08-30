@@ -1,0 +1,19 @@
+// Darken color
+@function darken-color($color, $percentage) {
+  @return darken($color, $percentage);
+}
+
+// Lighten color
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+/// Generates an RGBA color from a given color and opacity percentage
+/// @param {Color} $color - The base color to use
+/// @param {Number} $percentage - The opacity percentage (0-100)
+/// @return {Color} The resulting RGBA color
+/// @example
+///   color: rgba-color(#ff0000, 50%); // Returns rgba(255, 0, 0, 0.5)
+@function rgbaGenerate($color, $percentage) {
+  @return rgb(from $color r g b / $percentage);
+}

@@ -1,0 +1,139 @@
+.footer {
+  padding-top: 246px;
+  background-color: $primary;
+  margin-top: -126px;
+  color: rgbaGenerate($white, 80%);
+}
+.footer-social {
+  margin-top: 30px;
+  @extend .header-social;
+  ul {
+    justify-content: flex-start !important;
+    li {
+      a {
+        width: 35px !important;
+        height: 35px !important;
+        background-color: rgbaGenerate($white, 10%);
+        border: 0 !important;
+        color: $white;
+        &:hover {
+          background-color: $third;
+          color: $gray500;
+        }
+      }
+    }
+  }
+}
+
+.footer-menu-title {
+  color: $white;
+  margin-bottom: 30px;
+}
+.footer-menu-2 {
+  li {
+    position: relative;
+    &::before {
+      content: "\f101";
+      font-family: "Font Awesome 5 Pro";
+      margin-right: 15px;
+    }
+  }
+}
+.footer-menu {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include flexbox(column, flex-start, flex-start);
+    gap: 15px;
+    a {
+      color: rgbaGenerate($white, 80%);
+      @include transition;
+      &:hover {
+        color: $third;
+      }
+    }
+  }
+}
+
+.footer-contact {
+  li {
+    @include flexbox(row, flex-start, center);
+    gap: 15px;
+    p {
+      color: rgbaGenerate($white, 80%);
+      margin-bottom: 10px;
+    }
+    h4 {
+      color: $white;
+    }
+  }
+  i {
+    width: 35px;
+    height: 35px;
+    background-color: rgbaGenerate($white, 10%);
+    color: $white;
+    border-radius: 50%;
+    @include flexbox(row, center, center);
+  }
+}
+
+.footer-copyright {
+  border-top: 1px solid rgbaGenerate($white, 20%);
+  padding: 30px 0;
+  margin-top: 80px;
+  .copyright-menu {
+    ul {
+      @include flexbox(row, start, center);
+      list-style: none;
+      gap: 30px;
+      padding: 0;
+      margin: 0;
+      a {
+        @include transition;
+        &:hover {
+          color: $third;
+        }
+      }
+    }
+  }
+}
+
+.footer-2 {
+  background-color: $primary;
+  padding-top: 120px;
+  color: $white;
+}
+
+.footer-cta {
+  color: $white;
+  .stroke-text {
+    -webkit-text-stroke: 1px $white;
+    -webkit-text-fill-color: $primary;
+  }
+  background-color: rgbaGenerate($gray500, 10%);
+  border: 1px solid rgbaGenerate($white, 10%);
+  padding: 35px 0;
+  border-radius: 30px;
+  margin-bottom: 80px;
+}
+
+.footer-menu-container {
+  .subscribe-form {
+    .input-group {
+      border: 1px solid rgbaGenerate($white, 20%);
+      input {
+        color: $white;
+      }
+    }
+    i {
+      background-color: $third;
+      color: $primary;
+      height: 100%;
+      width: 57px;
+      right: 0 !important;
+      @include flexbox(row, center, center);
+      border-radius: 0 999px 999px 0;
+    }
+  }
+}

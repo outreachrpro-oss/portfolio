@@ -1,0 +1,56 @@
+// Theme Button
+// This section styles the theme button
+// It uses flexbox for layout and applies custom styling to the button
+
+%btn-style {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  font-size: $btn_font_size;
+  font-weight: $btn_font_weight;
+  @include transition;
+  i {
+    font-weight: 600;
+  }
+}
+
+.theme-btn {
+  @extend %btn-style;
+  padding: 22px 28px;
+  border-radius: 999px;
+  color: $primary;
+  border: 1px solid $primary;
+  &.with-icon {
+    gap: 10px;
+  }
+  &:hover {
+    background-color: $primary;
+    color: $white;
+  }
+  @include breakpoint(max-lg) {
+    padding: 18px 24px;
+  }
+}
+.theme-btn-2 {
+  @extend %btn-style;
+  padding: 22px 28px;
+  border-radius: 999px;
+}
+.theme-btn-3 {
+  @extend %btn-style;
+  padding: 22px 28px;
+  border-radius: 999px;
+  background-color: $primary;
+  color: $white;
+  &.secondary-bg {
+    background-color: $secondary;
+    color: $gray500;
+  }
+}
+
+.read-more {
+  @extend %btn-style;
+  i {
+    font-size: 16px;
+  }
+}

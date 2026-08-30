@@ -1,0 +1,65 @@
+// Color variables
+// Color variables
+:root {
+  --primary: #063b26;
+  --secondary: #cfff92;
+  --third: #ffeb69;
+  --white: #ffffff;
+  --rating: #ffb34e;
+  --rating2: #bdc1c6;
+  --rating3: #dbde4b;
+  --gray100: #f5f6f4;
+  --gray200: #e9e9e9;
+  --gray300: #252525;
+  --gray400: #363636;
+  --gray500: #030e09;
+}
+
+$primary: var(--primary);
+$secondary: var(--secondary);
+$third: var(--third);
+$white: var(--white);
+$rating: var(--rating);
+$rating2: var(--rating2);
+$rating3: var(--rating3);
+$gray100: var(--gray100);
+$gray200: var(--gray200);
+$gray300: var(--gray300);
+$gray400: var(--gray400);
+$gray500: var(--gray500);
+
+$colors: (
+  primary: $primary,
+  secondary: $secondary,
+  third: $third,
+  white: $white,
+  rating: $rating,
+  rating2: $rating2,
+  rating3: $rating3,
+  gray: (
+    100: $gray100,
+    200: $gray200,
+    300: $gray300,
+    400: $gray400,
+    500: $gray500,
+  ),
+);
+
+// Typography
+$font-family-inter: "Inter", sans-serif;
+$font-family-plus-jakarta-sans: "Plus Jakarta Sans", sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+// Button
+$btn_font_size: 15px;
+$btn_font_weight: 500;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-index
+$z-index: 1000;

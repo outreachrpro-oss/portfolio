@@ -1,0 +1,512 @@
+// Banner
+.banner-2 {
+  background-image: url("../../img/banner-2-bg.png");
+  background-size: cover;
+  background-position: center;
+  padding-top: 175px;
+
+  h1 {
+    font-size: 100px;
+    text-transform: capitalize;
+    font-weight: 200;
+    color: $gray500;
+    @include breakpoint(max-lg) {
+      font-size: 80px;
+    }
+    @include breakpoint(max-sm) {
+      font-size: 60px;
+    }
+    b {
+      font-weight: 700;
+    }
+    i {
+      font-size: 76px;
+      @include breakpoint(max-lg) {
+        font-size: 50px;
+      }
+    }
+  }
+  .banner-2-content {
+    padding-bottom: 130px;
+    @include breakpoint(max-xl) {
+      // text-align: center;
+      br {
+        display: none;
+      }
+    }
+  }
+}
+
+// Counter
+.home-2-counter {
+  margin-top: -30px;
+  position: relative;
+  z-index: 1;
+  padding: 60px 0;
+  color: $white;
+  margin-top: -45px;
+  @include breakpoint(max-xxl) {
+    margin-top: -65px;
+  }
+}
+
+.counter-2-container {
+  @include flexbox(column, center, center);
+  &.border-right {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 60px;
+      background-color: rgbaGenerate($gray200, 10%);
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    @include breakpoint(max-md) {
+      &.border-md-0 {
+        &::after {
+          content: "";
+          width: 0;
+        }
+      }
+    }
+  }
+}
+
+.counter-2-item {
+  h2 {
+    font-size: 90px;
+    color: rgbaGenerate($white, 90%);
+    font-weight: 300;
+    @include breakpoint(max-xl) {
+      font-size: 60px;
+    }
+    @include breakpoint(max-xs) {
+      font-size: 40px;
+    }
+  }
+}
+
+.about-2-items {
+  border: 1px solid $gray200;
+  padding: 40px 0;
+  border-radius: 20px;
+  margin-top: 64px;
+  .about-2-item-container {
+    @include flexbox(column, center, center);
+    overflow: hidden;
+    &.border-right {
+      position: relative;
+      padding: 0 70px;
+      @include breakpoint(max-lg) {
+        border-bottom: 1px solid $gray200;
+        padding-bottom: 30px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        background-color: $primary;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        @include breakpoint(max-lg) {
+          width: 0;
+        }
+      }
+    }
+  }
+  .about-2-item {
+    text-align: center;
+    .about-2-icon {
+      height: 80px;
+      width: 80px;
+      @include flexbox(row, center, center);
+      border-radius: 50%;
+      background-color: $gray200;
+      font-size: 40px;
+      margin: 0 auto;
+    }
+    h4 {
+      margin-top: 30px;
+    }
+  }
+}
+
+// brand
+.brands-2 {
+  background-color: $white;
+  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 5%);
+  padding: 58px 0;
+  overflow-x: hidden;
+}
+
+// wcu-lists
+.wcu-lists {
+  #wcu-img {
+    @include transition;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 69px;
+    li {
+      padding: 23px 40px;
+      border: 1px solid rgbaGenerate($primary, 20%);
+      border-radius: 20px;
+      @include flexbox(row, start, center);
+      margin-bottom: 30px;
+      cursor: pointer;
+      @include breakpoint(max-md) {
+        align-items: start;
+        padding: 23px 20px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &.wcu-active,
+      &:hover {
+        a {
+          background-color: $primary !important;
+          color: $white !important;
+        }
+      }
+      .wcu-number {
+        font-size: 45px;
+        font-weight: 500;
+        color: rgbaGenerate($primary, 20%);
+        @include breakpoint(max-xxs) {
+          font-size: 30px;
+        }
+      }
+      .wcu-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-left: 30px;
+        @include breakpoint(max-xxs) {
+          margin-left: 15px;
+        }
+        @include breakpoint(max-md) {
+          flex-direction: column;
+          align-items: start;
+          gap: 15px;
+        }
+
+        a {
+          height: 65px;
+          width: 65px;
+          @include flexbox(row, center, center);
+          background-color: $white;
+          border-radius: 50%;
+          color: $gray500;
+          font-size: 30px;
+          @include transition;
+        }
+      }
+    }
+  }
+}
+
+.subscribe-2-section {
+  h2 {
+    font-size: 45px;
+    color: $gray500;
+    @include breakpoint(max-sm) {
+      font-size: 30px;
+    }
+  }
+  .subscribe-form {
+    margin-top: 30px;
+    .input-group {
+      padding: 18px 30px;
+      margin-bottom: 0px;
+    }
+    .theme-btn-2 {
+      padding: 22px 40px;
+    }
+  }
+}
+
+.wp-wrapper {
+  position: relative;
+  .wp-shap {
+    position: absolute;
+    left: 15%;
+    top: -15%;
+    max-width: 885px;
+    width: 100%;
+    z-index: -1;
+    @include breakpoint(max-xxl) {
+      max-width: 800px;
+    }
+    @include breakpoint(max-xl) {
+      max-width: 664px;
+      top: -5%;
+    }
+    @include breakpoint(max-lg) {
+      max-width: 500px;
+    }
+    @include breakpoint(max-md) {
+      display: none;
+    }
+  }
+  .wp-item {
+    text-align: center;
+    padding: 0 40px;
+    @include breakpoint(max-xl) {
+      padding: 0;
+    }
+    .wp-content {
+      position: relative;
+      margin-top: 20px;
+      h3 {
+        margin-bottom: 20px;
+        @include breakpoint(max-lg) {
+          font-size: 20px;
+          line-height: 30px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .wp-number {
+      font-size: 130px;
+      font-weight: 900;
+      color: rgbaGenerate($gray500, 5%);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+    .wp-icon {
+      height: 60px;
+      width: 60px;
+      @include flexbox(row, center, center);
+      border-radius: 50%;
+      background-color: $third;
+      font-size: 30px;
+      margin: 0 auto;
+    }
+  }
+  .wp-items {
+    margin-top: 140px;
+    @include breakpoint(max-lg) {
+      margin-top: 70px;
+    }
+  }
+}
+
+.play-btn {
+  font-size: 20px;
+  color: $white;
+  height: 65px;
+  width: 65px;
+  @include flexbox(row, center, center);
+  background-color: $primary;
+  border-radius: 50%;
+}
+
+.play-btn-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.testimonial-2-item {
+  padding: 40px 30px;
+  border-radius: 20px;
+  background-color: $gray100;
+  .ratings {
+    background-color: $white;
+    border-radius: 999px;
+    display: inline-flex;
+    padding: 10px 20px;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  .testimonial-2-content {
+    font-size: 20px;
+    margin-top: 20px;
+    @include breakpoint(max-xl) {
+      font-size: 18px;
+    }
+  }
+  .author-info {
+    p {
+      font-size: 14px;
+      letter-spacing: 0.1px;
+      margin-top: 5px;
+    }
+    h4 {
+      color: $gray500;
+    }
+  }
+  .quota-icon {
+    font-size: 38px;
+  }
+}
+
+.faq-2-section {
+  padding: 80px 80px 110px;
+  border-radius: 30px;
+  @include breakpoint(max-lg) {
+    padding: 40px 40px 70px;
+  }
+}
+.faq-2-items {
+  margin-top: 125px;
+  @include breakpoint(max-lg) {
+    margin-top: 40px;
+  }
+}
+
+// Team
+.team-2-item {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  @include transition;
+  &:hover,
+  &.active {
+    .team-2-content {
+      background-color: $secondary;
+      .team-2-social {
+        a {
+          background-color: rgbaGenerate($primary, 10%);
+        }
+      }
+    }
+  }
+  .team-2-content {
+    padding: 20px 0 30px;
+    background-color: $gray100;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
+
+    p {
+      margin-top: 5px;
+    }
+    .team-2-social {
+      @include flexbox(row, center, center);
+      gap: 10px;
+      margin-top: 20px;
+      a {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        @include flexbox(row, center, center);
+        font-size: 14px;
+        background-color: $white;
+        color: $gray500;
+        @include transition;
+        &:hover {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+.blog-2-items {
+  margin-top: 90px;
+}
+.blog-2-item {
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid $gray200;
+  .blog-2-img {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .theme-btn-3 {
+    &:hover {
+      background-color: $secondary;
+      color: $gray500;
+    }
+  }
+
+  .blog-2-title {
+    margin-bottom: 40px;
+  }
+}
+
+.blog-2-info {
+  @include flexbox(row, start, center);
+  gap: 16px;
+  margin-bottom: 20px;
+  @include breakpoint(max-lg) {
+    gap: 10px;
+  }
+  @include breakpoint(max-xsmall) {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+  p {
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    @include flexbox(row, start, center);
+    gap: 6px;
+  }
+}
+.blog-page {
+  .blog-2-info {
+    i {
+      color: $primary;
+    }
+  }
+}
+
+// Price
+.price-2-item {
+  background-color: $gray100;
+  border-radius: 20px;
+  padding: 40px;
+  .price-2-icon {
+    font-size: 120px;
+    color: $gray500;
+    margin-top: 20px;
+  }
+  a {
+    @extend %btn-style;
+    border: 1px solid $gray200;
+    padding: 22px 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    border-radius: 999px;
+    color: $gray500;
+    margin-top: 70px;
+    @include transition;
+    &:hover,
+    &.active {
+      background-color: $primary;
+      color: $white;
+      border: 1px solid $primary;
+    }
+  }
+  .price-2-price {
+    margin-top: 30px;
+    span {
+      @extend .section-title;
+    }
+  }
+  hr {
+    border-top: 1px solid rgbaGenerate($gray300, 20%);
+  }
+  p {
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    margin: 20px 0;
+  }
+}

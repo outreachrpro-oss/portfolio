@@ -1,0 +1,201 @@
+@mixin breakpoint($point) {
+  $breakpoints: (
+    xsmall: 450px,
+    xxs: 470px,
+    xs: 500px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    xxxl: 1600px,
+    xl4: 1899px,
+  );
+
+  @each $bp, $value in $breakpoints {
+    @if $point == $bp {
+      @media (min-width: $value) {
+        @content;
+      }
+    } @else if $point == "max-#{$bp}" {
+      @media (max-width: $value - 1px) {
+        @content;
+      }
+    }
+  }
+}
+
+// Flexbox mixin
+@mixin flexbox($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin transition {
+  transition: all 0.4s ease-in-out !important;
+}
+
+@function rgbaGenerate($color, $percentage) {
+  @return rgb(from $color r g b / $percentage);
+}
+
+@mixin text-fill($fill, $shadow) {
+  -webkit-text-fill-color: $fill;
+  text-shadow: -1px -1px 0 $shadow, 1px -1px 0 $shadow, -1px 1px 0 $shadow,
+    1px 1px 0 $shadow;
+}
+
+@mixin before {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+}
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+
+@mixin imgw {
+  width: 100%;
+  height: 100%;
+}
+
+$breakpoints-responsive: (
+  "": 0,
+  "xxxl": 1599px,
+  "xxl": 1399px,
+  "xl": 1199px,
+  "lg": 991px,
+  "md": 767px,
+  "sm": 575px,
+);
+
+@function breakpoint-infix($breakpoint) {
+  @return if($breakpoint == "", "", "-#{$breakpoint}");
+}
+
+@mixin generate-spacing-classes($infix) {
+  @for $i from 0 through 100 {
+    $props: (
+      m: margin,
+      p: padding,
+    );
+    $dirs: (
+      t: top,
+      b: bottom,
+      l: left,
+      r: right,
+    );
+
+    @each $prop, $full-prop in $props {
+      .wv-#{$prop}#{$infix}-#{$i} {
+        #{$full-prop}: #{$i}px;
+      }
+      @each $dir, $full-dir in $dirs {
+        .wv-#{$prop}#{$dir}#{$infix}-#{$i} {
+          #{$full-prop}-#{$full-dir}: #{$i}px;
+        }
+      }
+    }
+
+    .wv-fs#{$infix}-#{$i} {
+      font-size: #{$i}px;
+    }
+    .wv-lh#{$infix}-#{$i} {
+      line-height: #{(100 + $i) * 1%};
+    }
+    .wv-gap#{$infix}-#{$i} {
+      gap: #{$i}px;
+    }
+    .wv-br#{$infix}-#{$i} {
+      border-radius: #{$i}px;
+    }
+    .wv-h#{$infix}-#{$i} {
+      height: #{$i}px;
+    }
+    .wv-w#{$infix}-#{$i} {
+      width: #{$i}px;
+    }
+  }
+}
+
+@each $breakpoint, $breakpoint-size in $breakpoints-responsive {
+  $infix: breakpoint-infix($breakpoint);
+  @if $breakpoint-size != 0 {
+    @media (max-width: #{$breakpoint-size}) {
+      @include generate-spacing-classes($infix);
+    }
+  } @else {
+    @include generate-spacing-classes($infix);
+  }
+}
+
+@for $i from 1 through 9 {
+  .wv-fw-#{$i*100} {
+    font-weight: #{$i * 100};
+  }
+}
+
+$sizes: ("md", "xl", "lg", "sm", "xs", "xxl", "");
+@each $size in $sizes {
+  @include breakpoint("#{$size}") {
+    .flex-#{$size}-end {
+      display: flex;
+      justify-content: end;
+    }
+  }
+}
+
+.flex-end {
+  display: flex;
+  justify-content: end;
+}
+
+@each $name, $value in $colors {
+  @if type-of($value) == "map" {
+    @each $shade, $color in $value {
+      .color-#{$name}-#{$shade} {
+        color: #{$color};
+      }
+      .#{$name}-#{$shade}-bg {
+        background-color: #{$color};
+      }
+      .border-color-#{$name}-#{$shade} {
+        border-color: #{$color};
+      }
+      .hover-color-#{$name}-#{$shade}:hover {
+        color: #{$color};
+      }
+      .hover-#{$name}-#{$shade}-bg:hover {
+        background-color: #{$color};
+      }
+      .hover-border-color-#{$name}-#{$shade}:hover {
+        border-color: #{$color};
+      }
+    }
+  } @else {
+    .color-#{$name} {
+      color: #{$value};
+    }
+    .#{$name}-bg {
+      background-color: #{$value};
+    }
+    .border-color-#{$name} {
+      border-color: #{$value};
+    }
+    .hover-color-#{$name}:hover {
+      color: #{$value};
+    }
+    .hover-#{$name}-bg:hover {
+      background-color: #{$value};
+    }
+    .hover-border-color-#{$name}:hover {
+      border-color: #{$value};
+    }
+  }
+}

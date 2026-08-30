@@ -1,0 +1,64 @@
+.member-details-info {
+  background-color: $primary;
+  color: $white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  .member-info {
+    margin-bottom: 20px;
+    p {
+      margin-top: 5px;
+    }
+  }
+  .social-links {
+    h4 {
+      margin: 20px 0;
+      color: $white;
+    }
+    .footer-social {
+      margin-top: 0;
+      ul li a {
+        background-color: $white;
+        color: $primary;
+      }
+    }
+  }
+}
+
+.member-img {
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 400px;
+  @include breakpoint(max-xxl) {
+    max-height: 450px;
+  }
+}
+
+.member-contact-info {
+  background-color: $gray100;
+  border-radius: 20px;
+  padding: 25px 30px;
+  @include flexbox(row, start, center);
+  gap: 30px;
+  margin-bottom: 30px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .member-contact-icon {
+    @include flexbox(row, center, center);
+    width: 60px;
+    height: 60px;
+    background-color: $white;
+    border-radius: 50%;
+    color: $primary;
+    font-size: 18px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+  h4 {
+    @include breakpoint(max-xxl) {
+      font-size: 20px;
+      word-break: break-all;
+    }
+  }
+}
