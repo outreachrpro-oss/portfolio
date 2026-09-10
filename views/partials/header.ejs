@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi"
+    />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.css" />
+    <link rel="stylesheet" href="/css/wv-font.css" />
+    <link rel="stylesheet" href="/css/aos.mini.css" />
+    <link rel="stylesheet" href="/css/magnific-popup.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/template-cards.css" />
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon" />
+    <title><%= typeof title !== 'undefined' ? title : 'Web Development Agency' %> | WebVibe</title>
+  </head>
+  <body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>">
+    <!-- header -->
+    <header class="header-1 main-menu">
+      <div class="container-fluid">
+        <div
+          class="d-flex align-items-center justify-content-between flex-wrap wv-gap-10"
+        >
+          <a href="/" class="header-logo">
+            <img src="/img/logo.png" alt="Logo" />
+          </a>
+          <nav class="header-nav navbar-nav" id="navbarNav">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/services.html">Services</a></li>
+                  <li><a href="/portfolio.html">Portfolio</a></li>
+                  <li><a href="/pricing.html">Pricing</a></li>
+                  <li><a href="/about.html">About</a></li>
+                  <li><a href="/contact.html">Contact</a></li>
+                </ul>
+              </nav>
+          <div class="header-social d-none d-xxl-block">
+            <ul>
+              <li>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+              </li>
+            </ul>
+          </div>
+          <a href="#" class="toggle-sidebar">
+            <div class="toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+    <div class="sidebar gray-500-bg">
+      <div class="container">
+        <div class="sidebar-content">
+          <div class="row">
+            <a href="/" class="header-logo wv-mb-30">
+              <img src="/img/footer-logo.png" alt=""
+            /></a>
+            <div class="main-menu-mobile"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-overlay"></div>

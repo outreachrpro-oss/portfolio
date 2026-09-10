@@ -1,0 +1,163 @@
+<%- include('../partials/header') %>
+
+<div class="admin-light" style="min-height: 100vh;">
+  <div class="breadcrumb">
+    <div class="container">
+      <div class="breadcrumb-content">
+        <div class="row align-items-center">
+          <div class="col-lg-12">
+            <h1><%= template ? 'Edit' : 'Add' %> Template</h1>
+            <p class="wv-mt-20">Fill template details. Technology &amp; Category are free text — type anything you want.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section-margin" style="padding-top: 0;">
+    <div class="container">
+      <form action="/admin/templates/save" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= template ? template.id : '' %>">
+
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="admin-card mb-4">
+              <h4 class="mb-4">Template Information</h4>
+
+              <div class="mb-3">
+                <label class="admin-label">Template Name</label>
+                <input type="text" name="title" class="admin-input" value="<%= template ? template.title : '' %>" required placeholder="e.g. Modern SaaS Website">
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="admin-label">Technology</label>
+                  <input
+                    type="text"
+                    name="technology"
+                    class="admin-input"
+                    list="tech-suggestions"
+                    value="<%= template ? template.technology : '' %>"
+                    placeholder="e.g. HTML, React, Next.js"
+                    required
+                  >
+                  <datalist id="tech-suggestions">
+                    <option value="HTML"></option>
+                    <option value="React"></option>
+                  </datalist>
+                </div>
+                <div class="col-md-6">
+                  <label class="admin-label">Category</label>
+                  <input
+                    type="text"
+                    name="category"
+                    class="admin-input"
+                    list="category-suggestions"
+                    value="<%= template ? template.category : '' %>"
+                    placeholder="e.g. Business, SaaS, Portfolio"
+                    required
+                  >
+                  <datalist id="category-suggestions">
+                    <option value="Business"></option>
+                    <option value="SaaS"></option>
+                  </datalist>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Short Description</label>
+                <textarea name="shortDescription" class="admin-textarea" rows="2" placeholder="Brief summary for cards..."><%= template ? template.shortDescription : '' %></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Full Description</label>
+                <textarea name="description" class="admin-textarea" rows="5" placeholder="Detailed information..."><%= template ? template.description : '' %></textarea>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <h4 class="mb-4">Details</h4>
+
+              <div class="mb-3">
+                <label class="admin-label">Features (one per line)</label>
+                <textarea name="features" class="admin-textarea" rows="4" placeholder="Fully Responsive&#10;SEO Ready"><%= template && template.features ? template.features.join('\n') : '' %></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Pages Included (one per line)</label>
+                <textarea name="pagesIncluded" class="admin-textarea" rows="4" placeholder="Home&#10;About"><%= template && template.pagesIncluded ? template.pagesIncluded.join('\n') : '' %></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Technologies Used (one per line)</label>
+                <textarea name="technologiesUsed" class="admin-textarea" rows="4" placeholder="HTML&#10;CSS&#10;JavaScript"><%= template && template.technologiesUsed ? template.technologiesUsed.join('\n') : '' %></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="admin-card mb-4">
+              <h4 class="mb-4">Links &amp; Price</h4>
+
+              <div class="mb-3">
+                <label class="admin-label">Live Demo URL</label>
+                <input type="url" name="liveDemoUrl" class="admin-input" value="<%= template ? template.liveDemoUrl : '' %>" placeholder="https://...">
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Purchase URL (optional)</label>
+                <input type="url" name="purchaseUrl" class="admin-input" value="<%= template ? template.purchaseUrl : '' %>" placeholder="https://...">
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Price (optional)</label>
+                <input type="text" name="price" class="admin-input" value="<%= template ? template.price : '' %>" placeholder="e.g. $49 or ₹2599">
+              </div>
+            </div>
+
+            <div class="admin-card mb-4">
+              <h4 class="mb-4">Media</h4>
+
+              <div class="mb-3">
+                <label class="admin-label">Main Thumbnail</label>
+                <input type="file" name="thumbnail" class="admin-input" accept="image/*" <%= template ? '' : 'required' %>>
+                <% if (template && template.thumbnail) { %>
+                  <div class="mt-2 text-center">
+                    <img src="<%= encodeURI(template.thumbnail) %>" alt="" style="max-width: 100%; border-radius: 10px;">
+                  </div>
+                <% } %>
+              </div>
+
+              <div class="mb-3">
+                <label class="admin-label">Gallery Images (Up to 5)</label>
+                <input type="file" name="gallery" class="admin-input" accept="image/*" multiple>
+                <% if (template && template.galleryImages && template.galleryImages.length) { %>
+                  <div class="mt-2 row g-2">
+                    <% template.galleryImages.forEach(function(img) { %>
+                      <div class="col-4">
+                        <img src="<%= encodeURI(img) %>" alt="" style="width: 100%; border-radius: 5px;">
+                      </div>
+                    <% }); %>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <h4 class="mb-4">Save</h4>
+              <div class="admin-actions">
+                <button type="submit" name="status" value="draft" class="btn-draft">Save Draft</button>
+                <button type="submit" name="status" value="published" class="btn-publish">Publish Template</button>
+              </div>
+              <p class="mt-3 mb-0" style="color:#6b7280;font-size:13px;">
+                Only <strong>Publish Template</strong> shows the template on the public Portfolio page.
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<%- include('../partials/footer') %>

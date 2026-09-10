@@ -1,0 +1,6 @@
+node_modules/
+uploads/templates/*
+!uploads/templates/.gitkeep
+.DS_Store
+*.log
+.env

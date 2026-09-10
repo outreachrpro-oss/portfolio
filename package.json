@@ -1,0 +1,30 @@
+{
+  "name": "webvibe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/outreachrpro-oss/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/outreachrpro-oss/portfolio/issues"
+  },
+  "homepage": "https://github.com/outreachrpro-oss/portfolio#readme",
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "multer": "^2.3.0",
+    "slugify": "^1.6.9",
+    "uuid": "^14.0.2"
+  }
+}

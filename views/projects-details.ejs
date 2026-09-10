@@ -1,0 +1,130 @@
+<%- include('partials/header') %>
+
+    <section class="template-details-light" style="padding: 140px 0 40px;">
+      <div class="container">
+        <div class="portfolio-img overflow-hidden wv-br-20">
+          <img
+            data-aos="zoom-out"
+            src="<%= encodeURI(template.thumbnail) %>"
+            class="w-100"
+            alt="<%= template.title %>"
+          />
+        </div>
+
+        <div class="row wv-mt-45">
+          <div class="col-xl-8 col-lg-7">
+            <h1 class="section-title portfolio-details-title"><%= template.title %></h1>
+            <% if (template.shortDescription) { %>
+              <p class="wv-mt-20" style="color:#6b7280; max-width: 720px;"><%= template.shortDescription %></p>
+            <% } %>
+            <div class="d-flex wv-mt-30 flex-wrap" style="gap: 12px;">
+              <% if (template.liveDemoUrl) { %>
+                <a href="<%= template.liveDemoUrl %>" target="_blank" class="theme-btn with-icon">
+                  Live Demo
+                  <i class="fa-light fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              <% } %>
+              <% if (template.purchaseUrl) { %>
+                <a href="<%= template.purchaseUrl %>" target="_blank" class="theme-btn-2 with-icon">
+                  Purchase <%= template.price ? '(' + template.price + ')' : '' %>
+                  <i class="fa-light fa-cart-shopping" aria-hidden="true"></i>
+                </a>
+              <% } %>
+            </div>
+            <div class="d-block d-sm-flex justify-content-between align-items-center wv-mt-30">
+              <div class="portfolio-info wv-mb-sm-30">
+                <p>Technology</p>
+                <h4><%= template.technology %></h4>
+              </div>
+              <hr class="portfolio-info-hr d-none d-sm-block" />
+              <div class="portfolio-info wv-mb-sm-30">
+                <p>Category</p>
+                <h4><%= template.category %></h4>
+              </div>
+              <hr class="portfolio-info-hr d-none d-sm-block" />
+              <div class="portfolio-info">
+                <p>Price</p>
+                <h4><%= template.price || 'Available' %></h4>
+              </div>
+            </div>
+
+            <div class="wv-mt-40">
+              <h3 class="wv-mb-20">About this Template</h3>
+              <p style="white-space: pre-line;"><%= template.description %></p>
+            </div>
+
+            <div class="row g-4 wv-mt-20">
+              <div class="col-md-4">
+                <div class="template-info-box h-100">
+                  <h4 class="mb-3">Features</h4>
+                  <ul class="blog-details-ul">
+                    <% (template.features || []).forEach(function(feature) { %>
+                      <li><%= feature %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="template-info-box h-100">
+                  <h4 class="mb-3">Pages Included</h4>
+                  <ul class="blog-details-ul">
+                    <% (template.pagesIncluded || []).forEach(function(page) { %>
+                      <li><%= page %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="template-info-box h-100">
+                  <h4 class="mb-3">Technologies</h4>
+                  <ul class="blog-details-ul">
+                    <% (template.technologiesUsed || []).forEach(function(tech) { %>
+                      <li><%= tech %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <% if (template.galleryImages && template.galleryImages.length) { %>
+              <h3 class="wv-mt-60 wv-mb-30 text-center">Gallery</h3>
+              <div class="row g-4">
+                <% template.galleryImages.forEach(function(img) { %>
+                  <div class="col-lg-6">
+                    <div class="position-relative overflow-hidden wv-br-20">
+                      <img src="<%= encodeURI(img) %>" class="w-100" data-aos="zoom-out" alt="" />
+                    </div>
+                  </div>
+                <% }); %>
+              </div>
+            <% } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-5">
+            <div class="template-info-box">
+              <h3 class="mb-3">Template Info</h3>
+              <ul class="mb-0" style="list-style: none; padding: 0;">
+                <li class="mb-3"><strong>Category:</strong> <%= template.category %></li>
+                <li class="mb-3"><strong>Technology:</strong> <%= template.technology %></li>
+                <% if (template.price) { %>
+                  <li class="mb-3"><strong>Price:</strong> <%= template.price %></li>
+                <% } %>
+                <% if (template.liveDemoUrl) { %>
+                  <li class="mb-3">
+                    <strong>Live Demo:</strong>
+                    <a href="<%= template.liveDemoUrl %>" target="_blank">Open Demo</a>
+                  </li>
+                <% } %>
+              </ul>
+              <a href="/portfolio.html" class="theme-btn with-icon wv-mt-20 w-100 text-center justify-content-center">
+                Back to Templates
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-top-gap"></div>
+
+<%- include('partials/footer') %>

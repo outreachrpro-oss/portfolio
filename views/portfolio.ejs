@@ -1,0 +1,98 @@
+<%- include('partials/header') %>
+
+    <!-- Templates Grid -->
+    <section class="template-section" style="padding-top: 140px;">
+      <div class="container">
+        <div class="text-center wv-mb-40">
+          <h2 class="section-title">Premium Templates</h2>
+        </div>
+
+        <% if (filters && filters.length) { %>
+          <div class="template-filters" id="templateFilters">
+            <button type="button" class="template-filter-btn active" data-filter="all">All</button>
+            <% filters.forEach(function(f) { %>
+              <button type="button" class="template-filter-btn" data-filter="<%= f.toLowerCase() %>"><%= f %></button>
+            <% }); %>
+          </div>
+        <% } %>
+
+        <div class="row g-4" id="templateGrid">
+          <% templates.forEach(function(template) { %>
+            <div
+              class="col-xl-3 col-lg-4 col-md-6 template-item"
+              data-tech="<%= (template.technology || '').toLowerCase() %>"
+              data-category="<%= (template.category || '').toLowerCase() %>"
+            >
+              <div class="template-card">
+                <a href="/projects-details.html?slug=<%= template.slug %>" class="template-card-img">
+                  <img src="<%= encodeURI(template.thumbnail) %>" alt="<%= template.title %>" />
+                  <% if (template.price) { %>
+                    <span class="template-badge"><%= template.price %></span>
+                  <% } %>
+                  <% if (template.technology) { %>
+                    <span class="template-badge tech"><%= template.technology %></span>
+                  <% } %>
+                </a>
+                <div class="template-card-body">
+                  <h3 class="template-card-title">
+                    <a href="/projects-details.html?slug=<%= template.slug %>" style="color: inherit; text-decoration: none;">
+                      <%= template.title %>
+                    </a>
+                  </h3>
+                  <p class="template-card-desc">
+                    <%= template.shortDescription || template.description || '' %>
+                  </p>
+                  <div class="template-meta">
+                    <span><i class="fa-light fa-layer-group"></i> <%= template.category || 'General' %></span>
+                    <span><i class="fa-light fa-code"></i> <%= template.technology || 'Web' %></span>
+                  </div>
+                  <div class="template-card-footer">
+                    <% if (template.price) { %>
+                      <div class="template-price"><%= template.price %></div>
+                    <% } else { %>
+                      <div class="template-price-free">Available</div>
+                    <% } %>
+                    <div class="template-card-actions">
+                      <% if (template.liveDemoUrl) { %>
+                        <a class="template-btn-demo" href="<%= template.liveDemoUrl %>" target="_blank" rel="noopener">Demo</a>
+                      <% } %>
+                      <a class="template-btn-details" href="/projects-details.html?slug=<%= template.slug %>">Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+
+          <% if (!templates.length) { %>
+            <div class="col-12 text-center">
+              <p>No templates published yet. Add one from Admin → Templates.</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll('.template-filter-btn');
+        var items = document.querySelectorAll('.template-item');
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            buttons.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.getAttribute('data-filter');
+            items.forEach(function (item) {
+              var tech = item.getAttribute('data-tech') || '';
+              var cat = item.getAttribute('data-category') || '';
+              var show = filter === 'all' || tech === filter || cat === filter;
+              item.style.display = show ? '' : 'none';
+            });
+          });
+        });
+      })();
+    </script>
+
+    <div class="footer-top-gap"></div>
+
+<%- include('partials/footer') %>
