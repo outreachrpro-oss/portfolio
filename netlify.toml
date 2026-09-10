@@ -1,0 +1,40 @@
+[build]
+  command = "npm install"
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["express", "ejs", "multer", "@netlify/blobs", "serverless-http"]
+  included_files = ["views/**", "lib/**", "data/**", "app.js", "projects-details.html", "index.html"]
+
+# Keep original request paths when proxying to the Express function
+[[redirects]]
+  from = "/admin"
+  to = "/.netlify/functions/server/admin"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/.netlify/functions/server/admin/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/portfolio.html"
+  to = "/.netlify/functions/server/portfolio.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/projects-details.html"
+  to = "/.netlify/functions/server/projects-details.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/templates/*"
+  to = "/.netlify/functions/server/templates/:splat"
+  status = 200
+  force = true
