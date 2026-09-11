@@ -48,38 +48,16 @@
               <p style="white-space: pre-line;"><%= template.description %></p>
             </div>
 
-            <div class="row g-4 wv-mt-20">
-              <div class="col-md-4">
-                <div class="template-info-box h-100">
-                  <h4 class="mb-3">Features</h4>
-                  <ul class="blog-details-ul">
-                    <% (template.features || []).forEach(function(feature) { %>
-                      <li><%= feature %></li>
-                    <% }); %>
-                  </ul>
+            <% if (template.features && template.features.length) { %>
+              <div class="template-info-box wv-mt-40">
+                <h4 class="mb-3">Features</h4>
+                <div class="template-features-horizontal">
+                  <% template.features.forEach(function(feature) { %>
+                    <span class="template-feature-chip"><%= feature %></span>
+                  <% }); %>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="template-info-box h-100">
-                  <h4 class="mb-3">Pages Included</h4>
-                  <ul class="blog-details-ul">
-                    <% (template.pagesIncluded || []).forEach(function(page) { %>
-                      <li><%= page %></li>
-                    <% }); %>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="template-info-box h-100">
-                  <h4 class="mb-3">Technologies</h4>
-                  <ul class="blog-details-ul">
-                    <% (template.technologiesUsed || []).forEach(function(tech) { %>
-                      <li><%= tech %></li>
-                    <% }); %>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <% } %>
 
             <% if (template.galleryImages && template.galleryImages.length) { %>
               <h3 class="wv-mt-60 wv-mb-30 text-center">Gallery</h3>
