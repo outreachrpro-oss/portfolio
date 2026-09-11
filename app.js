@@ -79,7 +79,11 @@ app.get('/admin/templates', (req, res) => {
   res.redirect('/portfolio.html');
 });
 
-app.get('/admin/templates/*', (req, res) => {
+app.get('/admin/templates/:id', (req, res) => {
+  res.redirect('/portfolio.html');
+});
+
+app.get('/admin/templates/:id/:action', (req, res) => {
   res.redirect('/portfolio.html');
 });
 
