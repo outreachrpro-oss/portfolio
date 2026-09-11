@@ -1,14 +1,15 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
 const slugify = require('slugify');
 const bodyParser = require('body-parser');
 const {
   getTemplates,
   saveTemplates,
   saveImage,
+  saveImageFromBase64,
   getImage,
 } = require('./lib/storage');
 
@@ -19,7 +20,6 @@ const ROOT_DIR = process.cwd();
 app.set('view engine', 'ejs');
 app.set('views', path.join(ROOT_DIR, 'views'));
 
-// Netlify function path cleanup
 app.use((req, _res, next) => {
   const prefix = '/.netlify/functions/server';
   if (req.url.startsWith(prefix)) {
@@ -28,8 +28,8 @@ app.use((req, _res, next) => {
   next();
 });
 
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
-app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '12mb' }));
+app.use(bodyParser.json({ limit: '12mb' }));
 
 const getFilterOptions = (templates) => {
   const set = new Set();
@@ -40,11 +40,103 @@ const getFilterOptions = (templates) => {
   return Array.from(set).sort((a, b) => a.localeCompare(b));
 };
 
-// Memory storage works on Netlify Functions (no local disk)
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+function splitLines(value) {
+  if (Array.isArray(value)) return value.map((v) => String(v).trim()).filter(Boolean);
+  if (!value) return [];
+  return String(value)
+    .split('\n')
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+async function upsertTemplate(payload, files) {
+  const templates = await getTemplates();
+  const {
+    id,
+    title,
+    technology,
+    category,
+    shortDescription,
+    description,
+    liveDemoUrl,
+    purchaseUrl,
+    price,
+    features,
+    pagesIncluded,
+    technologiesUsed,
+    status,
+    thumbnailData,
+    galleryData,
+  } = payload;
+
+  if (!title || !String(title).trim()) {
+    throw new Error('Template name is required');
+  }
+
+  const published = status === 'published' || status === true || status === 'true';
+  const slug = slugify(String(title), { lower: true, strict: true });
+
+  let existing = null;
+  if (id) existing = templates.find((t) => t.id === id);
+
+  let thumbnail = existing ? existing.thumbnail : '';
+  if (files && files.thumbnail && files.thumbnail[0]) {
+    thumbnail = await saveImage(files.thumbnail[0]);
+  } else if (thumbnailData) {
+    thumbnail = await saveImageFromBase64(thumbnailData, `${slug}-thumb.jpg`);
+  }
+
+  let galleryImages = existing ? existing.galleryImages || [] : [];
+  if (files && files.gallery && files.gallery.length) {
+    const newImages = [];
+    for (const file of files.gallery) {
+      newImages.push(await saveImage(file));
+    }
+    galleryImages = [...galleryImages, ...newImages].slice(0, 5);
+  } else if (Array.isArray(galleryData) && galleryData.length) {
+    const newImages = [];
+    for (let i = 0; i < Math.min(galleryData.length, 5); i++) {
+      newImages.push(await saveImageFromBase64(galleryData[i], `${slug}-gallery-${i}.jpg`));
+    }
+    galleryImages = [...galleryImages, ...newImages].slice(0, 5);
+  }
+
+  const newTemplate = {
+    id: id || crypto.randomUUID(),
+    title: String(title).trim(),
+    slug,
+    technology: String(technology || '').trim(),
+    category: String(category || '').trim(),
+    shortDescription: shortDescription || '',
+    description: description || '',
+    thumbnail,
+    galleryImages,
+    liveDemoUrl: liveDemoUrl || '',
+    purchaseUrl: purchaseUrl || '',
+    price: price || '',
+    features: splitLines(features),
+    pagesIncluded: splitLines(pagesIncluded),
+    technologiesUsed: splitLines(technologiesUsed),
+    published,
+    createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  if (id && existing) {
+    const index = templates.findIndex((t) => t.id === id);
+    templates[index] = newTemplate;
+  } else {
+    templates.push(newTemplate);
+  }
+
+  await saveTemplates(templates);
+  return newTemplate;
+}
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(ROOT_DIR, 'index.html'));
@@ -55,7 +147,8 @@ app.get('/index.html', (req, res) => {
 });
 
 app.get('/portfolio.html', async (req, res) => {
-  const templates = (await getTemplates()).filter((t) => t.published);
+  // Show all templates on portfolio
+  const templates = await getTemplates();
   const filters = getFilterOptions(templates);
   res.render('portfolio', {
     title: 'Portfolio',
@@ -63,6 +156,16 @@ app.get('/portfolio.html', async (req, res) => {
     templates,
     filters,
   });
+});
+
+app.get('/api/templates', async (req, res) => {
+  try {
+    const templates = await getTemplates();
+    res.json({ templates });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to load templates' });
+  }
 });
 
 app.get('/projects-details.html', async (req, res) => {
@@ -103,6 +206,7 @@ app.get('/admin/templates/add', (req, res) => {
   });
 });
 
+// Multipart save (local / when multer works)
 app.post(
   '/admin/templates/save',
   upload.fields([
@@ -111,87 +215,25 @@ app.post(
   ]),
   async (req, res) => {
     try {
-      const templates = await getTemplates();
-      const {
-        id,
-        title,
-        technology,
-        category,
-        shortDescription,
-        description,
-        liveDemoUrl,
-        purchaseUrl,
-        price,
-        features,
-        pagesIncluded,
-        technologiesUsed,
-        status,
-      } = req.body;
-
-      const published = status === 'published';
-      const slug = slugify(title || 'template', { lower: true, strict: true });
-
-      let existing = null;
-      if (id) {
-        existing = templates.find((t) => t.id === id);
-      }
-
-      let thumbnail = existing ? existing.thumbnail : '';
-      if (req.files && req.files.thumbnail && req.files.thumbnail[0]) {
-        thumbnail = await saveImage(req.files.thumbnail[0]);
-      }
-
-      let galleryImages = existing ? existing.galleryImages || [] : [];
-      if (req.files && req.files.gallery && req.files.gallery.length) {
-        const newImages = [];
-        for (const file of req.files.gallery) {
-          newImages.push(await saveImage(file));
-        }
-        galleryImages = [...galleryImages, ...newImages].slice(0, 5);
-      }
-
-      const newTemplate = {
-        id: id || uuidv4(),
-        title,
-        slug,
-        technology: (technology || '').trim(),
-        category: (category || '').trim(),
-        shortDescription,
-        description,
-        thumbnail,
-        galleryImages,
-        liveDemoUrl,
-        purchaseUrl,
-        price,
-        features: features
-          ? features.split('\n').map((f) => f.trim()).filter(Boolean)
-          : [],
-        pagesIncluded: pagesIncluded
-          ? pagesIncluded.split('\n').map((p) => p.trim()).filter(Boolean)
-          : [],
-        technologiesUsed: technologiesUsed
-          ? technologiesUsed.split('\n').map((t) => t.trim()).filter(Boolean)
-          : [],
-        published,
-        createdAt: existing ? existing.createdAt : new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-
-      if (id && existing) {
-        const index = templates.findIndex((t) => t.id === id);
-        templates[index] = newTemplate;
-      } else {
-        templates.push(newTemplate);
-      }
-
-      await saveTemplates(templates);
+      await upsertTemplate(req.body || {}, req.files || {});
       res.redirect('/admin/templates');
     } catch (err) {
       console.error('Save template error:', err);
-      res.status(500).send('Failed to save template. Please try again.');
+      res.status(500).send(`Failed to save template: ${err.message}`);
     }
   }
 );
+
+// JSON + base64 save (reliable on Netlify)
+app.post('/admin/templates/save-json', async (req, res) => {
+  try {
+    const template = await upsertTemplate(req.body || {}, {});
+    res.json({ ok: true, template });
+  } catch (err) {
+    console.error('Save JSON template error:', err);
+    res.status(500).json({ ok: false, error: err.message || 'Failed to save template' });
+  }
+});
 
 app.get('/admin/templates/edit/:id', async (req, res) => {
   const templates = await getTemplates();
@@ -205,13 +247,17 @@ app.get('/admin/templates/edit/:id', async (req, res) => {
 });
 
 app.post('/admin/templates/delete/:id', async (req, res) => {
-  let templates = await getTemplates();
-  templates = templates.filter((t) => t.id !== req.params.id);
-  await saveTemplates(templates);
-  res.redirect('/admin/templates');
+  try {
+    let templates = await getTemplates();
+    templates = templates.filter((t) => t.id !== req.params.id);
+    await saveTemplates(templates);
+    res.redirect('/admin/templates');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Failed to delete: ${err.message}`);
+  }
 });
 
-// Serve uploaded template images (local disk or Netlify Blobs)
 app.get('/templates/:filename', async (req, res) => {
   try {
     const image = await getImage(req.params.filename);

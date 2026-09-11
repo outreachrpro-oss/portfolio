@@ -6,9 +6,15 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["express", "ejs", "multer", "@netlify/blobs", "serverless-http"]
-  included_files = ["views/**", "lib/**", "data/**", "app.js", "projects-details.html", "index.html"]
+  included_files = ["views/**", "lib/**", "data/**", "app.js", "projects-details.html", "index.html", "portfolio.html"]
 
 # Keep original request paths when proxying to the Express function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/api/:splat"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/admin"
   to = "/.netlify/functions/server/admin"

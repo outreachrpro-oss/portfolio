@@ -1,10 +1,9 @@
 <%- include('partials/header') %>
 
-    <!-- Templates Grid -->
-    <section class="template-section" style="padding-top: 140px;">
+    <section class="template-section" style="padding-top: 120px;">
       <div class="container">
         <div class="text-center wv-mb-40">
-          <h2 class="section-title">Premium Templates</h2>
+          <h2 class="section-title">Portfolio</h2>
         </div>
 
         <% if (filters && filters.length) { %>
@@ -25,10 +24,7 @@
             >
               <div class="template-card">
                 <a href="/projects-details.html?slug=<%= template.slug %>" class="template-card-img">
-                  <img src="<%= encodeURI(template.thumbnail) %>" alt="<%= template.title %>" />
-                  <% if (template.price) { %>
-                    <span class="template-badge"><%= template.price %></span>
-                  <% } %>
+                  <img src="<%= encodeURI(template.thumbnail || '/img/portfolio-1.png') %>" alt="<%= template.title %>" />
                   <% if (template.technology) { %>
                     <span class="template-badge tech"><%= template.technology %></span>
                   <% } %>
@@ -66,7 +62,7 @@
 
           <% if (!templates.length) { %>
             <div class="col-12 text-center">
-              <p>No templates published yet. Add one from Admin → Templates.</p>
+              <p>No projects yet. Add from Admin → Templates.</p>
             </div>
           <% } %>
         </div>
@@ -85,8 +81,7 @@
             items.forEach(function (item) {
               var tech = item.getAttribute('data-tech') || '';
               var cat = item.getAttribute('data-category') || '';
-              var show = filter === 'all' || tech === filter || cat === filter;
-              item.style.display = show ? '' : 'none';
+              item.style.display = (filter === 'all' || tech === filter || cat === filter) ? '' : 'none';
             });
           });
         });
