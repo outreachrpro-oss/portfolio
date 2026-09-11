@@ -136,5 +136,68 @@
     "published": true,
     "createdAt": "2026-09-11T00:00:00.000Z",
     "updatedAt": "2026-09-11T00:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "title": "Hotels Business Website",
+    "slug": "hotels-business-website",
+    "technology": "",
+    "category": "Business / Hospitality / Hotel Website",
+    "shortDescription": "A professional hotel business website template designed for hotels, resorts, and hospitality brands.",
+    "description": "Hotels Business Website is a modern hospitality website template created for hotels, resorts, and lodging businesses. The design focuses on showcasing rooms, amenities, booking-focused sections, and a clean guest experience.\n\nThis template is ideal for hotel owners, hospitality startups, and agencies building premium accommodation websites.",
+    "thumbnail": "/img/hotel main.jpg",
+    "galleryImages": [
+      "/img/Hotels Business Website.png"
+    ],
+    "liveDemoUrl": "",
+    "purchaseUrl": "",
+    "price": "",
+    "features": [
+      "Hotel landing page layout",
+      "Rooms and amenities showcase",
+      "Hospitality-focused design",
+      "Booking-ready sections",
+      "Modern visual presentation",
+      "Responsive layout",
+      "Clean guest experience",
+      "Conversion-focused CTAs"
+    ],
+    "pagesIncluded": [],
+    "technologiesUsed": [],
+    "published": true,
+    "createdAt": "2026-09-12T00:00:00.000Z",
+    "updatedAt": "2026-09-12T00:00:00.000Z"
+  },
+  {
+    "id": "5",
+    "title": "Dentora - Dental Clinic Website",
+    "slug": "dentora-dental-clinic-website",
+    "technology": "",
+    "category": "Business / Healthcare / Dental Clinic Website",
+    "shortDescription": "A professional dental clinic website template designed for dentists, clinics, and oral care practices.",
+    "description": "Dentora is a modern dental clinic website built for dentists and healthcare practices. The design highlights services, patient care, appointment-focused sections, testimonials, and a clean medical brand experience.\n\nThis template is ideal for dental clinics, orthodontists, and agencies creating healthcare websites.",
+    "thumbnail": "/img/vl-demo-1.1.png",
+    "galleryImages": [
+      "/img/vl-demo-1.2.png",
+      "/img/vl-demo-1.3.png"
+    ],
+    "liveDemoUrl": "https://dental-clinic-pi-ivory.vercel.app/",
+    "purchaseUrl": "",
+    "price": "",
+    "features": [
+      "Dental clinic landing page",
+      "Services showcase sections",
+      "Appointment-focused CTAs",
+      "Patient testimonials",
+      "About and care process sections",
+      "Blog / insights layout",
+      "Contact and location details",
+      "Responsive healthcare design"
+    ],
+    "pagesIncluded": [],
+    "technologiesUsed": [],
+    "published": true,
+    "createdAt": "2026-09-12T00:00:00.000Z",
+    "updatedAt": "2026-09-12T00:00:00.000Z"
   }
 ]

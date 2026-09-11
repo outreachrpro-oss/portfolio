@@ -255,6 +255,22 @@
             shortDescription: 'An AI-powered SaaS website designed for automated outreach, lead generation, and business growth solutions.',
             thumbnail: './img/3out.png',
             liveDemoUrl: 'https://outreachrpro.xyz'
+          },
+          {
+            title: 'Hotels Business Website',
+            slug: 'hotels-business-website',
+            category: 'Business / Hospitality / Hotel Website',
+            shortDescription: 'A professional hotel business website template designed for hotels, resorts, and hospitality brands.',
+            thumbnail: './img/hotel main.jpg',
+            liveDemoUrl: ''
+          },
+          {
+            title: 'Dentora - Dental Clinic Website',
+            slug: 'dentora-dental-clinic-website',
+            category: 'Business / Healthcare / Dental Clinic Website',
+            shortDescription: 'A professional dental clinic website template designed for dentists, clinics, and oral care practices.',
+            thumbnail: './img/vl-demo-1.1.png',
+            liveDemoUrl: 'https://dental-clinic-pi-ivory.vercel.app/'
           }
         ];
 
@@ -268,10 +284,10 @@
         function card(t) {
           var href = 'projects-details.html?slug=' + encodeURIComponent(t.slug || '');
           return (
-            '<div class="col-xl-4 col-lg-4 col-md-6 template-item" data-category="' +
+            '<div class="col-xl-3 col-lg-4 col-md-6 template-item" data-category="' +
             esc((t.category || '').toLowerCase()) +
             '"><div class="template-card">' +
-            '<a href="' + href + '" class="template-card-img"><img src="' + esc(t.thumbnail) + '" alt="' + esc(t.title) + '"/></a>' +
+            '<a href="' + href + '" class="template-card-img"><img src="' + encodeURI(t.thumbnail) + '" alt="' + esc(t.title) + '"/></a>' +
             '<div class="template-card-body"><h3 class="template-card-title"><a href="' +
             href +
             '" style="color:inherit;text-decoration:none;">' +
