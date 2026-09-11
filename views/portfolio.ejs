@@ -19,15 +19,11 @@
           <% templates.forEach(function(template) { %>
             <div
               class="col-xl-3 col-lg-4 col-md-6 template-item"
-              data-tech="<%= (template.technology || '').toLowerCase() %>"
               data-category="<%= (template.category || '').toLowerCase() %>"
             >
               <div class="template-card">
                 <a href="/projects-details.html?slug=<%= template.slug %>" class="template-card-img">
                   <img src="<%= encodeURI(template.thumbnail || '/img/portfolio-1.png') %>" alt="<%= template.title %>" />
-                  <% if (template.technology) { %>
-                    <span class="template-badge tech"><%= template.technology %></span>
-                  <% } %>
                 </a>
                 <div class="template-card-body">
                   <h3 class="template-card-title">
@@ -40,14 +36,9 @@
                   </p>
                   <div class="template-meta">
                     <span><i class="fa-light fa-layer-group"></i> <%= template.category || 'General' %></span>
-                    <span><i class="fa-light fa-code"></i> <%= template.technology || 'Web' %></span>
                   </div>
                   <div class="template-card-footer">
-                    <% if (template.price) { %>
-                      <div class="template-price"><%= template.price %></div>
-                    <% } else { %>
-                      <div class="template-price-free">Available</div>
-                    <% } %>
+                    <div class="template-price-free">Available</div>
                     <div class="template-card-actions">
                       <% if (template.liveDemoUrl) { %>
                         <a class="template-btn-demo" href="<%= template.liveDemoUrl %>" target="_blank" rel="noopener">Demo</a>
@@ -62,7 +53,7 @@
 
           <% if (!templates.length) { %>
             <div class="col-12 text-center">
-              <p>No projects yet. Add from Admin → Templates.</p>
+              <p>No projects yet.</p>
             </div>
           <% } %>
         </div>
@@ -79,9 +70,8 @@
             btn.classList.add('active');
             var filter = btn.getAttribute('data-filter');
             items.forEach(function (item) {
-              var tech = item.getAttribute('data-tech') || '';
               var cat = item.getAttribute('data-category') || '';
-              item.style.display = (filter === 'all' || tech === filter || cat === filter) ? '' : 'none';
+              item.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
             });
           });
         });

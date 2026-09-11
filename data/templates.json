@@ -1,28 +1,140 @@
 [
   {
-    "id": "a9d53648-efde-45fa-8951-2dd9109a46d2",
-    "title": "dental doctor",
-    "slug": "dental-doctor",
-    "technology": "HTML",
-    "category": "Business",
-    "shortDescription": "demo",
-    "description": "demo",
-    "thumbnail": "/templates/1788987073057-WhatsApp Image 2026-09-09 at 11.21.28 PM.jpeg",
-    "galleryImages": [],
-    "liveDemoUrl": "https://www.templatemonster.com/services/hire-web-developer-pay-per-hour/?package=30-hours",
+    "id": "1",
+    "title": "PyVerse - Python Learning Platform",
+    "slug": "pyverse-python-learning-platform",
+    "technology": "",
+    "category": "Education / Programming / E-Learning Website",
+    "shortDescription": "A professional online learning platform designed for Python programming courses, tutorials, coding practice, and technology education.",
+    "description": "PyVerse is an educational technology website built for students, developers, and professionals who want to learn Python programming. The platform provides structured learning content, programming resources, coding examples, and AI-focused educational solutions.\n\nThe design focuses on a clean learning experience with modern UI, easy navigation, and conversion-focused sections for online education businesses.",
+    "thumbnail": "/img/Pyverse.png",
+    "galleryImages": [
+      "/img/py1.png"
+    ],
+    "liveDemoUrl": "https://pyverse.io",
     "purchaseUrl": "",
     "price": "",
     "features": [
-      "demo"
+      "Interactive learning platform",
+      "Programming course showcase",
+      "Online tutorials section",
+      "Coding examples and exercises",
+      "AI learning assistant section",
+      "Blog and articles section",
+      "Responsive modern design",
+      "Contact and inquiry system",
+      "Student-focused user experience"
     ],
     "pagesIncluded": [
-      "demo"
+      "Home",
+      "About",
+      "Courses",
+      "Services",
+      "Blog",
+      "Articles",
+      "Contact",
+      "FAQ"
     ],
     "technologiesUsed": [
-      "demo"
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Responsive Web Design"
     ],
     "published": true,
-    "createdAt": "2026-09-09T20:51:13.077Z",
-    "updatedAt": "2026-09-09T20:51:13.077Z"
+    "createdAt": "2026-09-11T00:00:00.000Z",
+    "updatedAt": "2026-09-11T00:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "CheapRDP - RDP Hosting Website",
+    "slug": "cheaprdp-rdp-hosting-website",
+    "technology": "",
+    "category": "Hosting / SaaS / Technology Website",
+    "shortDescription": "A high-converting hosting website template designed for RDP, VPS, and cloud infrastructure service providers.",
+    "description": "CheapRDP is a professional hosting platform website created for selling remote desktop and VPS solutions. The design includes service showcases, pricing sections, server location pages, technical feature displays, and conversion-focused purchase flows.\n\nThis template is ideal for hosting companies, SaaS providers, cloud service businesses, and technology startups.",
+    "thumbnail": "/img/cheap.png",
+    "galleryImages": [
+      "/img/cheap1.png"
+    ],
+    "liveDemoUrl": "https://cheaprdp.net",
+    "purchaseUrl": "",
+    "price": "",
+    "features": [
+      "Modern hosting landing page",
+      "Product pricing sections",
+      "Server location showcase",
+      "Service comparison layout",
+      "Technology feature sections",
+      "Customer testimonial section",
+      "FAQ section",
+      "Strong CTA sections",
+      "Responsive design"
+    ],
+    "pagesIncluded": [
+      "Home",
+      "About Us",
+      "RDP Services",
+      "Pricing",
+      "Locations",
+      "Features",
+      "FAQ",
+      "Contact",
+      "Terms & Conditions"
+    ],
+    "technologiesUsed": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Responsive Design"
+    ],
+    "published": true,
+    "createdAt": "2026-09-11T00:00:00.000Z",
+    "updatedAt": "2026-09-11T00:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "OutreachPro - AI Outreach Platform",
+    "slug": "outreachpro-ai-outreach-platform",
+    "technology": "",
+    "category": "AI SaaS / Marketing Automation Website",
+    "shortDescription": "An AI-powered SaaS website designed for automated outreach, lead generation, and business growth solutions.",
+    "description": "OutreachPro is a modern SaaS website concept focused on AI-powered outreach and marketing automation. The design highlights product features, AI tools, workflow automation, pricing plans, and business growth solutions.\n\nThe template is suitable for AI startups, marketing platforms, sales automation tools, and SaaS businesses.",
+    "thumbnail": "/img/3out.png",
+    "galleryImages": [
+      "/img/1out.png",
+      "/img/2out.png"
+    ],
+    "liveDemoUrl": "https://outreachrpro.xyz",
+    "purchaseUrl": "",
+    "price": "",
+    "features": [
+      "AI-powered landing page",
+      "SaaS product showcase",
+      "Feature comparison sections",
+      "Pricing plans",
+      "Lead generation sections",
+      "Automation workflow display",
+      "Modern UI components",
+      "Conversion-focused design"
+    ],
+    "pagesIncluded": [
+      "Home",
+      "Features",
+      "Solutions",
+      "Pricing",
+      "About",
+      "Contact",
+      "FAQ"
+    ],
+    "technologiesUsed": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Modern UI Framework"
+    ],
+    "published": true,
+    "createdAt": "2026-09-11T00:00:00.000Z",
+    "updatedAt": "2026-09-11T00:00:00.000Z"
   }
 ]

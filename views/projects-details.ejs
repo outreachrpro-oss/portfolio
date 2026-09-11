@@ -33,18 +33,13 @@
             </div>
             <div class="d-block d-sm-flex justify-content-between align-items-center wv-mt-30">
               <div class="portfolio-info wv-mb-sm-30">
-                <p>Technology</p>
-                <h4><%= template.technology %></h4>
-              </div>
-              <hr class="portfolio-info-hr d-none d-sm-block" />
-              <div class="portfolio-info wv-mb-sm-30">
                 <p>Category</p>
                 <h4><%= template.category %></h4>
               </div>
               <hr class="portfolio-info-hr d-none d-sm-block" />
               <div class="portfolio-info">
-                <p>Price</p>
-                <h4><%= template.price || 'Available' %></h4>
+                <p>Live Demo</p>
+                <h4><%= template.liveDemoUrl ? 'Available' : '—' %></h4>
               </div>
             </div>
 
@@ -105,10 +100,6 @@
               <h3 class="mb-3">Template Info</h3>
               <ul class="mb-0" style="list-style: none; padding: 0;">
                 <li class="mb-3"><strong>Category:</strong> <%= template.category %></li>
-                <li class="mb-3"><strong>Technology:</strong> <%= template.technology %></li>
-                <% if (template.price) { %>
-                  <li class="mb-3"><strong>Price:</strong> <%= template.price %></li>
-                <% } %>
                 <% if (template.liveDemoUrl) { %>
                   <li class="mb-3">
                     <strong>Live Demo:</strong>
