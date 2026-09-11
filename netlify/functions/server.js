@@ -1,7 +1,8 @@
+const { connectLambda } = require('@netlify/blobs');
 const serverless = require('serverless-http');
 const { app } = require('../../app');
 
-exports.handler = serverless(app, {
+const expressHandler = serverless(app, {
   binary: [
     'image/png',
     'image/jpeg',
@@ -12,3 +13,14 @@ exports.handler = serverless(app, {
     'multipart/form-data',
   ],
 });
+
+// Lambda compatibility mode does not auto-configure Blobs.
+// Must call connectLambda(event) before getStore().
+exports.handler = async (event, context) => {
+  try {
+    connectLambda(event);
+  } catch (err) {
+    console.error('connectLambda error:', err);
+  }
+  return expressHandler(event, context);
+};
