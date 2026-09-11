@@ -229,5 +229,101 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.magnific-popup.min.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+      (function () {
+        function esc(s) {
+          return String(s || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/"/g, '&quot;');
+        }
+
+        function card(t) {
+          var href = '/projects-details.html?slug=' + encodeURIComponent(t.slug || '');
+          var img = t.thumbnail || './img/portfolio-1.png';
+          return (
+            '<div class="col-xl-3 col-lg-4 col-md-6 template-item" data-tech="' +
+            esc((t.technology || '').toLowerCase()) +
+            '" data-category="' +
+            esc((t.category || '').toLowerCase()) +
+            '"><div class="template-card">' +
+            '<a href="' + href + '" class="template-card-img"><img src="' + esc(img) + '" alt="' + esc(t.title) + '"/>' +
+            (t.technology ? '<span class="template-badge tech">' + esc(t.technology) + '</span>' : '') +
+            '</a><div class="template-card-body"><h3 class="template-card-title"><a href="' +
+            href +
+            '" style="color:inherit;text-decoration:none;">' +
+            esc(t.title) +
+            '</a></h3><p class="template-card-desc">' +
+            esc(t.shortDescription || t.description || '') +
+            '</p><div class="template-meta"><span><i class="fa-light fa-layer-group"></i> ' +
+            esc(t.category || 'General') +
+            '</span><span><i class="fa-light fa-code"></i> ' +
+            esc(t.technology || 'Web') +
+            '</span></div><div class="template-card-footer">' +
+            (t.price
+              ? '<div class="template-price">' + esc(t.price) + '</div>'
+              : '<div class="template-price-free">Available</div>') +
+            '<div class="template-card-actions">' +
+            (t.liveDemoUrl
+              ? '<a class="template-btn-demo" href="' + esc(t.liveDemoUrl) + '" target="_blank" rel="noopener">Demo</a>'
+              : '') +
+            '<a class="template-btn-details" href="' +
+            href +
+            '">Details</a></div></div></div></div></div>'
+          );
+        }
+
+        fetch('/api/templates')
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            var templates = data.templates || [];
+            var grid = document.getElementById('templateGrid');
+            var filtersEl = document.getElementById('templateFilters');
+            if (!templates.length) {
+              grid.innerHTML = '<div class="col-12 text-center"><p>No projects yet. Add from Admin → Templates.</p></div>';
+              return;
+            }
+            var filters = [];
+            templates.forEach(function (t) {
+              if (t.technology && filters.indexOf(t.technology) === -1) filters.push(t.technology);
+              if (t.category && filters.indexOf(t.category) === -1) filters.push(t.category);
+            });
+            filtersEl.innerHTML =
+              '<button type="button" class="template-filter-btn active" data-filter="all">All</button>' +
+              filters
+                .map(function (f) {
+                  return (
+                    '<button type="button" class="template-filter-btn" data-filter="' +
+                    esc(f.toLowerCase()) +
+                    '">' +
+                    esc(f) +
+                    '</button>'
+                  );
+                })
+                .join('');
+            grid.innerHTML = templates.map(card).join('');
+
+            var buttons = filtersEl.querySelectorAll('.template-filter-btn');
+            var items = grid.querySelectorAll('.template-item');
+            buttons.forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                buttons.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var filter = btn.getAttribute('data-filter');
+                items.forEach(function (item) {
+                  var tech = item.getAttribute('data-tech') || '';
+                  var cat = item.getAttribute('data-category') || '';
+                  item.style.display =
+                    filter === 'all' || tech === filter || cat === filter ? '' : 'none';
+                });
+              });
+            });
+          })
+          .catch(function () {
+            document.getElementById('templateGrid').innerHTML =
+              '<div class="col-12 text-center"><p>Could not load projects.</p></div>';
+          });
+      })();
+    </script>
   </body>
 </html>
